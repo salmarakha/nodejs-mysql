@@ -11,6 +11,10 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD
 });
 
+// to have access to the database in other files
+module.exports = pool.promise();
+
+
 /* - testing the connection - */
 // let query = "SELECT * FROM users";
 
@@ -22,6 +26,4 @@ const pool = mysql.createPool({
 
 // works just fine #
 /* -------------------------- */
-
-// to have access to the database in other files
-module.exports = pool.promise();
+    
