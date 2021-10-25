@@ -3,8 +3,11 @@ require("dotenv").config();  // To set environment variables in .env file
 const express = require("express");
 const app = express();
 
+const userRoutes = require("./routes/user"); // this could be generalized
+
 app.use(express.json());  // request's body parser; parse the body as json
 
+app.use("/", userRoutes);
 
 // Global error handler
 app.use((err, req, res, next) => {
