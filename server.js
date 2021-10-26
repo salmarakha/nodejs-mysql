@@ -14,7 +14,10 @@ app.use((err, req, res, next) => {
     // maybe I should log the errors to a txt file here TODO
     console.log(err);
 
-    res.status(500).json({ message: "Something went wrong!" });
+    res.status(500).json({ 
+        errorMessage: err.message, 
+        errorCode: err.code 
+    });
 });
 
 // Setup the server 

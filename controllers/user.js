@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 const addUser = async (newUserData) => {
     try{
-        let newUser = new User(
+        const newUser = new User(
             newUserData.firstname,
             newUserData.lastname,
             newUserData.email,
@@ -16,7 +16,7 @@ const addUser = async (newUserData) => {
     }
 }
 
-const login = async () => {
+const login = async (email, password) => {
 
 }
 

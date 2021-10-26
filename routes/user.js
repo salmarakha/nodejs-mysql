@@ -11,7 +11,7 @@ router.route("/users")
     .post(registerUser)
 
 router.route("/users/login")
-    .post(loginUser)
+    .post(loginUser) // TODO
      
 router.route("/users/:id")
     .get(getUserDetails)
@@ -24,13 +24,14 @@ function registerUser (req, res, next) {
     addUser(newUserData)
     .then(result => res.status(201).json({
         message: "User registered",
-        user: result[0]
+        user: result
     }))
     .catch(error => next(error)); // pass the error to the global error handler
 } 
 
 function loginUser (req, res, next) {
-    login()
+    const { email, password } = req.body;
+    login(email, password)
     .then(result => res.status(200).json({
         message: "User logged-in successfully",
         user: result
@@ -42,7 +43,7 @@ function getUserDetails (req, res, next) {
     const { id: userId } = req.params;
     getUser(userId)
     .then(result => res.json({
-        user: result[0]
+        user: result
     }))
     .catch(error => next(error));
 }
@@ -53,7 +54,7 @@ function editUserDetails (req, res, next) {
     editUser(userId, editedUserData)
     .then(result => res.status(200).json({
         message: "User Edited",
-        user: result[0]
+        user: result
     }))
     .catch(error => next(error));
 }
