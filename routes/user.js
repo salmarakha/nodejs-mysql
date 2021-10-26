@@ -1,6 +1,8 @@
 const express = require("express");
 const { addUser, login, getUser, editUser } = require("../controllers/user");
 const authjwt = require("../middlewares/auth");
+const { registerationValidation, loginValidation } = require("../middlewares/userValidationSchema");
+const validate = require("../middlewares/validation");
 const router = express.Router();
 
 /***  
@@ -9,10 +11,10 @@ const router = express.Router();
 ***/
 
 router.route("/users")
-    .post(registerUser)
+    .post(registerationValidation, validate, registerUser)
 
 router.route("/users/login")
-    .post(loginUser) // TODO
+    .post(loginValidation, validate, loginUser)
      
 router.route("/users/:id")
     .get(getUserDetails)

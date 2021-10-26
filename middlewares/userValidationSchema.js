@@ -18,8 +18,8 @@ const registerationValidation = [
     body('password')
     .exists({ checkFalsy: true })
     .withMessage("Password field is required")
-    .isLength({ min: 5 })
-    .withMessage("Minimum password length is 5"),
+    .isLength({ min: 4 })
+    .withMessage("Minimum password length is 4"),
 ];
 
 const loginValidation = [
@@ -32,8 +32,8 @@ const loginValidation = [
     body('password')
     .exists({ checkFalsy: true })
     .withMessage("Password field is required")
-    .isLength({ min: 5 })
-    .withMessage("Minimum password length is 5"),
+    .isLength({ min: 4 })
+    .withMessage("Minimum password length is 4"),
 ];
 
 module.exports = {
