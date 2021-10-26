@@ -20,12 +20,13 @@ router.route("/users/:id")
 
 // Routes Handlers
 function registerUser (req, res, next) {
-    addUser()
+    const { body: newUserData } = req;
+    addUser(newUserData)
     .then(result => res.status(201).json({
-        message: "Uer registered",
-        user: result
+        message: "User registered",
+        user: result[0]
     }))
-    .catch(error => next(err)); // pass the error to the global error handler
+    .catch(error => next(error)); // pass the error to the global error handler
 } 
 
 function loginUser (req, res, next) {

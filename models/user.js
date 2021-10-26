@@ -9,7 +9,7 @@ class User {
         this.dob = dob;
     }
 
-    save() {
+    async save() {
         let sqlStatement = `
             INSERT INTO users (firstname, lastname, email, password, phone, dob)
             VALUES (
@@ -18,10 +18,16 @@ class User {
                 '${this.email}',
                 '${this.password}',
                 '${this.phone}',
-                '${this.dob}',
+                '${this.dob}'
             )`;
-        const [newUser, _] = dbConnectionPool.execute(sqlStatement);
-        return newUser;
+        const queryResult = await dbConnectionPool.execute(sqlStatement);
+        return User.findById(queryResult[0].insertId); 
+    }
+
+    static async findById (id) {
+        let sqlStatement = `SELECT * FROM users WHERE id = ${id}`;
+        const [user, _] = await dbConnectionPool.execute(sqlStatement);
+        return user;
     }
 }
 
