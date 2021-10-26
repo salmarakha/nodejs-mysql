@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
 
 const addUser = async (newUserData) => {
     try{
@@ -23,8 +24,8 @@ const login = async (email, password) => {
         if (loggedUser) {
             const isValid = await loggedUser.validatePassword(password);
             if(isValid) {
-                // we should generate jwt but pass for now
-                return "User is Valid";
+                const token = loggedUser.generateAccessToken();
+                return { token: token, userEmail: loggedUser.email }
             } else throw new Error("UNAUTHENTICATED");
         } else throw new Error("USER_NOTFOUND");
     } catch (error) {

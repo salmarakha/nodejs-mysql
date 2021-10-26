@@ -1,6 +1,7 @@
 const dbConnectionPool = require("../config/db");
 // to hash passwords before insertion and in case of changing them
 const bcrypt = require("bcryptjs"); 
+const jwt = require("jsonwebtoken");
 class User {
     constructor(firstname, lastname, email, password, phone, dob) {
         this.firstname = firstname;
@@ -77,6 +78,20 @@ class User {
                 user[0].phone,
                 user[0].dob);
         return null;
+    }
+
+    generateAccessToken () {
+        try {
+            const payload = { id: this.id, email: this.email };
+            const secretKey = process.env.SECRET_KEY;
+            const options = { expiresIn: process.env.EXPIRES_IN };
+
+            const token = jwt.sign(payload, secretKey, options);
+
+            return token;
+        } catch (error) {
+            throw error;
+        }
     }
 }
 

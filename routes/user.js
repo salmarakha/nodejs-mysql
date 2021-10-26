@@ -32,9 +32,9 @@ function registerUser (req, res, next) {
 function loginUser (req, res, next) {
     const { email, password } = req.body;
     login(email, password)
-    .then(result => res.status(200).json({
-        message: "User logged-in successfully",
-        user: result
+    .then(result => res.status(200).json({ 
+        token: result.token,
+        userEmail: result.userEmail 
     }))
     .catch(error => next(error));
 }
