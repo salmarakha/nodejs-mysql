@@ -10,10 +10,9 @@ const addUser = async (newUserData) => {
             newUserData.phone,
             newUserData.dob
         );
-        console.log("Is there anyone alive?");
         return await newUser.save();
     } catch (error) {
-        //throw error;
+        next(error);
     }
 }
 
@@ -21,8 +20,12 @@ const login = async () => {
 
 }
 
-const getUser = async () => {
-
+const getUser = async (userId) => {
+    try {
+        return await User.findById(userId);
+    } catch(error) {
+        next(error);
+    }
 }
 
 const editUser = async () => {
