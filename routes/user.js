@@ -1,5 +1,6 @@
 const express = require("express");
 const { addUser, login, getUser, editUser } = require("../controllers/user");
+const authjwt = require("../middlewares/auth");
 const router = express.Router();
 
 /***  
@@ -15,7 +16,7 @@ router.route("/users/login")
      
 router.route("/users/:id")
     .get(getUserDetails)
-    .patch(editUserDetails)
+    .patch(authjwt, editUserDetails)
 
 
 // Routes Handlers

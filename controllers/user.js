@@ -20,12 +20,12 @@ const addUser = async (newUserData) => {
 const login = async (email, password) => {
     try {
         const loggedUser = await User.findByEmail(email);
-        console.log(loggedUser)
+        console.log(loggedUser);
         if (loggedUser) {
             const isValid = await loggedUser.validatePassword(password);
             if(isValid) {
                 const token = loggedUser.generateAccessToken();
-                return { token: token, userEmail: loggedUser.email }
+                return { token: token, userId: loggedUser.id }
             } else throw new Error("UNAUTHENTICATED");
         } else throw new Error("USER_NOTFOUND");
     } catch (error) {

@@ -3,7 +3,8 @@ const dbConnectionPool = require("../config/db");
 const bcrypt = require("bcryptjs"); 
 const jwt = require("jsonwebtoken");
 class User {
-    constructor(firstname, lastname, email, password, phone, dob) {
+    constructor(id = 0,firstname, lastname, email, password, phone, dob) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -71,6 +72,7 @@ class User {
         const [user, _] = await dbConnectionPool.execute(sqlStatement);
         if (user[0])
             return new User(
+                user[0].id,
                 user[0].firstname,
                 user[0].lastname,
                 user[0].email,
