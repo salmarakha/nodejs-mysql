@@ -12,7 +12,7 @@ const addUser = async (newUserData) => {
         );
         return await newUser.save();
     } catch (error) {
-        next(error);
+        throw error;
     }
 }
 
@@ -24,12 +24,16 @@ const getUser = async (userId) => {
     try {
         return await User.findById(userId);
     } catch(error) {
-        next(error);
+        throw error;
     }
 }
 
-const editUser = async () => {
-
+const editUser = async (userId, editedUserData) => {
+    try {
+        return await User.findByIdAndUpdate(userId, editedUserData);
+    } catch(error) {
+        throw error;
+    }
 }
 
 module.exports = {

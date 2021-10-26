@@ -49,10 +49,11 @@ function getUserDetails (req, res, next) {
 
 function editUserDetails (req, res, next) {
     const { id: userId } = req.params;
-    editUser(userId)
+    const { body: editedUserData } = req;
+    editUser(userId, editedUserData)
     .then(result => res.status(200).json({
         message: "User Edited",
-        user: result
+        user: result[0]
     }))
     .catch(error => next(error));
 }
