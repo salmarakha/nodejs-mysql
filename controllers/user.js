@@ -44,8 +44,11 @@ const getUser = async (userId) => {
     }
 }
 
-const editUser = async (userId, editedUserData) => {
+const editUser = async (userId, loggedUserId, editedUserData) => {
     try {
+        if (userId != loggedUserId) {
+            throw new Error("UNAUTHORIZED");
+        }  
         return await User.findByIdAndUpdate(userId, editedUserData);
     } catch(error) {
         throw error;
