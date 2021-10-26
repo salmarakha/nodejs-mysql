@@ -22,7 +22,7 @@ class User {
                 '${this.firstname}',
                 '${this.lastname}',
                 '${this.email}',
-                '${hashedPassword}',
+                '${this.password}',
                 '${this.phone}',
                 '${this.dob}'
             )`;
@@ -59,10 +59,24 @@ class User {
         return await User.findById(id);
     }
 
-    async validatePassword(password) {
+    validatePassword (password) {
         // compare the provided password with the hashed password
-        const isValidPassword = await bcrypt.compare(password, this.password);
-        return isValidPassword? true : false;
+        return bcrypt.compare(password, this.password);
+    }
+
+    static async findByEmail (email) {
+        // returns the first match
+        const sqlStatement = `SELECT * FROM users WHERE email = '${email}'`;
+        const [user, _] = await dbConnectionPool.execute(sqlStatement);
+        if (user[0])
+            return new User(
+                user[0].firstname,
+                user[0].lastname,
+                user[0].email,
+                user[0].password,
+                user[0].phone,
+                user[0].dob);
+        return null;
     }
 }
 

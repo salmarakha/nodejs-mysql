@@ -17,7 +17,18 @@ const addUser = async (newUserData) => {
 }
 
 const login = async (email, password) => {
-
+    try {
+        const loggedUser = await User.findByEmail(email);
+        if (loggedUser) {
+            const isValid = await loggedUser.validatePassword(password);
+            if(isValid) {
+                // we should generate jwt but pass for now
+                return "User is Valid";
+            } else throw new Error("UNAUTHENTICATED");
+        }
+    } catch (error) {
+        throw error;
+    }    
 }
 
 const getUser = async (userId) => {
