@@ -33,7 +33,8 @@ class User {
     static async findById (id) {
         let sqlStatement = `SELECT * FROM users WHERE id = ${id}`;
         const [user, _] = await dbConnectionPool.execute(sqlStatement);
-        user[0].password = undefined;
+        if(user[0])
+            user[0].password = undefined;
         return user[0];
     }
 

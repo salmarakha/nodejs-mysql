@@ -26,7 +26,7 @@ const login = async (email, password) => {
                 // we should generate jwt but pass for now
                 return "User is Valid";
             } else throw new Error("UNAUTHENTICATED");
-        } else throw new Error("User not found");
+        } else throw new Error("USER_NOTFOUND");
     } catch (error) {
         throw error;
     }    
@@ -34,7 +34,10 @@ const login = async (email, password) => {
 
 const getUser = async (userId) => {
     try {
-        return await User.findById(userId);
+        const user = await User.findById(userId);
+        if (!user) 
+            throw new Error("USER_NOTFOUND");
+        return user;
     } catch(error) {
         throw error;
     }
