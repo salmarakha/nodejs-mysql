@@ -49,7 +49,6 @@ class User {
         sqlStatment = sqlStatment.substring(0, sqlStatment.length - 2); 
         sqlStatment += ` WHERE id = ${id}`;
 
-        // execute query
         const queryResult = await dbConnectionPool.execute(sqlStatment);
 
         if (queryResult[0].affectedRows === 0)
