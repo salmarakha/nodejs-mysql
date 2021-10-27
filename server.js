@@ -1,10 +1,14 @@
 require("dotenv").config();  // To set environment variables in .env file 
 const fs = require("fs");
 
+const cors = require("cors");
+
 const express = require("express");
 const app = express();
 
 const userRoutes = require("./routes/user"); // this could be generalized
+
+app.use(cors());
 
 app.use(express.json());  // request's body parser; parse the body as json
 

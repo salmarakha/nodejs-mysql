@@ -37,7 +37,7 @@ function loginUser (req, res, next) {
     login(email, password)
     .then(result => res.status(200).json({ 
         token: result.token,
-        userEmail: result.userEmail 
+        userId: result.userId 
     }))
     .catch(error => next(error));
 }
