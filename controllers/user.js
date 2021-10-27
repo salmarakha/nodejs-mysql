@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const addUser = async (newUserData) => {
     try{
         const newUser = new User(
+            0,
             newUserData.firstname,
             newUserData.lastname,
             newUserData.email,
@@ -11,6 +12,7 @@ const addUser = async (newUserData) => {
             newUserData.phone,
             newUserData.dob
         );
+        console.log(newUser)
         return await newUser.save();
     } catch (error) {
         throw error;

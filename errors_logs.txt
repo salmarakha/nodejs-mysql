@@ -1,2 +1,18 @@
 [2021-10-27 3:37:31] POST: /users/login ErrorMsg: USER_NOTFOUND
 [2021-10-27 3:37:54] POST: /users/login ErrorMsg: UNAUTHENTICATED
+[2021-10-27 19:49:45] POST: /users/login ErrorMsg: UNAUTHENTICATED
+[2021-10-27 19:53:36] POST: /users/login ErrorMsg: UNAUTHENTICATED
+[2021-10-27 19:55:1] POST: /users/login ErrorMsg: UNAUTHENTICATED
+[2021-10-27 20:20:36] GET: /users/10 ErrorMsg: USER_NOTFOUND
+[2021-10-27 22:22:54] PATCH: /users/1 ErrorMsg: Incorrect date value: '1999-09-08T21:00:00.000Z' for column 'dob' at row 1
+[2021-10-27 22:36:47] PATCH: /users/2 ErrorMsg: UNAUTHORIZED
+[2021-10-27 23:25:11] POST: /users ErrorMsg: Incorrect date value: 'undefined' for column 'dob' at row 1
+[2021-10-27 23:26:50] POST: /users ErrorMsg: Incorrect date value: 'undefined' for column 'dob' at row 1
+[2021-10-27 23:28:29] POST: /users ErrorMsg: Data too long for column 'phone' at row 1
+[2021-10-27 23:29:49] POST: /users ErrorMsg: Data too long for column 'phone' at row 1
+[2021-10-27 23:31:34] POST: /users ErrorMsg: Data too long for column 'phone' at row 1
+[2021-10-27 23:34:50] POST: /users ErrorMsg: Data too long for column 'phone' at row 1
+[2021-10-27 23:40:11] POST: /users ErrorMsg: Data too long for column 'phone' at row 1
+[2021-10-27 23:41:27] POST: /users ErrorMsg: Incorrect date value: 'Fri Sep 22 2000 03:00:00 GMT+0300 (Eastern European Summer Time)' for column 'dob' at row 1
+[2021-10-27 23:43:53] GET: /users/NaN ErrorMsg: Unknown column 'NaN' in 'where clause'
+[2021-10-27 23:44:49] GET: /users/NaN ErrorMsg: Unknown column 'NaN' in 'where clause'
