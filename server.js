@@ -1,4 +1,5 @@
 require("dotenv").config();  // To set environment variables in .env file 
+const fs = require("fs");
 
 const express = require("express");
 const app = express();
@@ -9,10 +10,37 @@ app.use(express.json());  // request's body parser; parse the body as json
 
 app.use("/", userRoutes);
 
+// Log errors
+function logErrors (err, req) {
+    /***
+     *  Logging will take the format: 
+        [date time] method: url Error: msg
+     ***/ 
+    const currentDate = new Date();
+    const formatDateTime = 
+        currentDate.getFullYear() + "-" +
+        (currentDate.getMonth() + 1) + "-" +
+        currentDate.getDate() + " " +
+        currentDate.getHours() + ":" +
+        currentDate.getMinutes() + ":" +
+        currentDate.getSeconds();
+    const log = `[${formatDateTime}] ${req.method}: ${req.url} ErrorMsg: ${err.message}`;
+    
+    // log errors to a text file
+    fs.appendFile("errors_logs.txt", log + "\n", err => {
+        if (err) {
+          console.log(err);
+        }
+    });
+    return log;
+}
+
 // Global error handler
 app.use((err, req, res, next) => {
-    // maybe I should log the errors to a txt file here TODO
-    console.log(err);
+    // log errors to terminal and to a txt file
+    console.log(logErrors (err, req));
+
+    // handle errors TODO
 
     res.status(500).json({ 
         errorMessage: err.message, 
